@@ -9,6 +9,7 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 
+#define MESSAGE_KEY @(0x0)
 
 @implementation OrgBeuckmanTipebbleModule
 
@@ -51,7 +52,7 @@
     if (connectedWatch) {
         [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
             NSLog(@"[INFO] Received message: %@", update);
-            [self fireEvent:@"update" withObject:update];
+            [self fireEvent:@"update" withObject:@{ @"message": update[MESSAGE_KEY] }];
             return YES;
         }];
     }
