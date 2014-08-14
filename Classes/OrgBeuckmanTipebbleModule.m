@@ -51,7 +51,7 @@
     if (connectedWatch) {
         [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *update) {
             NSLog(@"[INFO] Received message: %@", update);
-//            [self fireEvent:@"update" withObject:update];
+            [self fireEvent:@"update" withObject:update];
             return YES;
         }];
     }
@@ -212,8 +212,7 @@
             NSLog(@"Error sending message: %@", error);
             [self _fireEventToListener:@"error" withObject:error listener:errorCallback thisObject:nil];
         }
-        [connectedWatch closeSession:^{
-        }];
+        
     }];
     }
 }
@@ -270,8 +269,7 @@
 
             [self _fireEventToListener:@"success" withObject:versionInfoDict listener:successCallback thisObject:nil];
         }
-        [connectedWatch closeSession:^{
-        }];
+        
         
     }
             onTimeout:^(PBWatch *watch) {
@@ -280,8 +278,7 @@
                     NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Timed out trying to get version info from Pebble.",@"message",nil];
                     [self _fireEventToListener:@"error" withObject:event listener:errorCallback thisObject:nil];
                 }
-                [connectedWatch closeSession:^{
-                }];
+                
             }
      ];
     }
@@ -296,7 +293,7 @@
     ENSURE_SINGLE_ARG(args, NSDictionary);
     
     @synchronized(connectedWatch){
-    
+    [self listenToConnectedWatch];
     NSLog(@"[INFO] TiPebble launchApp()");
     
     id success = [args objectForKey:@"success"];
@@ -320,8 +317,7 @@
                 [self _fireEventToListener:@"error" withObject:event listener:errorCallback thisObject:nil];
             }
         }
-        [connectedWatch closeSession:^{
-        }];
+        
     }];
     
     }
@@ -360,8 +356,7 @@
                 [self _fireEventToListener:@"error" withObject:event listener:errorCallback thisObject:nil];
             }
         }
-        [connectedWatch closeSession:^{
-        }];
+        
     }];
     }
 }
