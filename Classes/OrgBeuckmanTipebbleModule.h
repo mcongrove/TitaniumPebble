@@ -8,15 +8,12 @@
 #import <PebbleKit/PebbleKit.h>
 #import "KBPebbleMessageQueue.h"
 
-
 @interface OrgBeuckmanTipebbleModule : TiModule <PBPebbleCentralDelegate>
 {
-    PBWatch *connectedWatch;
-
-    KrollCallback *successCallback;
-    KrollCallback *errorCallback;
-    
-    KBPebbleMessageQueue *pebbleDataQueue;
+	PBWatch *connectedWatch;
+	KrollCallback *successCallback;
+	KrollCallback *errorCallback;
+	KBPebbleMessageQueue *pebbleDataQueue;
 }
 
 @end
