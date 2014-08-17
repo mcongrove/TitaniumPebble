@@ -32,6 +32,7 @@ id updateHandler;
 
 -(void)dealloc
 {
+	[connectedWatch closeSession:^{}];
 	[super dealloc];
 }
 
@@ -40,22 +41,6 @@ id updateHandler;
 -(void)didReceiveMemoryWarning:(NSNotification*)notification
 {
 	[super didReceiveMemoryWarning:notification];
-}
-
-#pragma mark Listener Notifications
-
--(void)_listenerAdded:(NSString *)type count:(int)count
-{
-	if(count == 1 && [type isEqualToString:@"my_event"]) {
-
-	}
-}
-
--(void)_listenerRemoved:(NSString *)type count:(int)count
-{
-	if(count == 0 && [type isEqualToString:@"my_event"]) {
-
-	}
 }
 
 #pragma mark Lifecycle
@@ -69,6 +54,8 @@ id updateHandler;
 	[[PBPebbleCentral defaultCentral] setDelegate:self];
 
 	connectedWatch = [[PBPebbleCentral defaultCentral] lastConnectedWatch];
+	
+	[self listenToConnectedWatch];
 }
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidConnect:(PBWatch*)watch isNew:(BOOL)isNew
@@ -76,6 +63,8 @@ id updateHandler;
 	NSLog(@"[INFO] TiPebble.watchDidConnect: %@", [watch name]);
 
 	connectedWatch = watch;
+	
+	[self listenToConnectedWatch];
 
 	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[watch name], @"name", nil];
 	[self fireEvent:@"watchConnected" withObject:event];
@@ -91,12 +80,6 @@ id updateHandler;
 		connectedWatch = nil;
 	}
 
-	if(updateHandler) {
-		[connectedWatch appMessagesRemoveUpdateHandler:updateHandler];
-
-		updateHandler = nil;
-	}
-
 	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[watch name], @"name", nil];
 	[self fireEvent:@"watchDisconnected" withObject:event];
 }
@@ -105,6 +88,12 @@ id updateHandler;
 {
 	if(connectedWatch) {
 		NSLog(@"[INFO] TiPebble.listenToConnectedWatch: Listening");
+
+		if(updateHandler) {
+			[connectedWatch appMessagesRemoveUpdateHandler:updateHandler];
+	
+			updateHandler = nil;
+		}
 
 		updateHandler = [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *message) {
 			NSLog(@"[INFO] TiPebble.listenToConnectedWatch : Received message");
@@ -163,12 +152,12 @@ id updateHandler;
 
 -(void)connect:(id)args
 {
-	NSLog(@"[INFO] TiPebble.connect");
-
 	ENSURE_UI_THREAD_1_ARG(args);
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
+		NSLog(@"[INFO] TiPebble.connect");
+		
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -181,14 +170,20 @@ id updateHandler;
 		[connectedWatch appMessagesGetIsSupported:^(PBWatch *watch, BOOL isAppMessagesSupported) {
 			if(!isAppMessagesSupported) {
 				NSLog(@"[ERROR] TiPebble.connect: Watch does not support messages");
-
+				
 				if(errorCallback != nil) {
 					[self _fireEventToListener:@"error" withObject:nil listener:errorCallback thisObject:nil];
 				}
+	
+				return;
 			}
 			
 			NSLog(@"[INFO] TiPebble.connect: Messages supported");
-
+	
+			connectedWatch = watch;
+	
+			[self listenToConnectedWatch];
+			
 			if(successCallback != nil) {
 				[self _fireEventToListener:@"success" withObject:nil listener:successCallback thisObject:nil];
 			}
@@ -208,6 +203,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
+		NSLog(@"[INFO] TiPebble.getVersionInfo");
+		
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -247,8 +244,6 @@ id updateHandler;
 
 -(void)launchApp:(id)args
 {
-	NSLog(@"[INFO] TiPebble.launchApp");
-
 	if(![self checkWatchConnected]) {
 		NSLog(@"[WARN] TiPebble.launchApp: No watch connected");
 
@@ -259,6 +254,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
+		NSLog(@"[INFO] TiPebble.launchApp");
+		
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -271,6 +268,8 @@ id updateHandler;
 		[connectedWatch appMessagesLaunch:^(PBWatch *watch, NSError *error) {
 			if(!error) {
 				NSLog(@"[INFO] TiPebble.launchApp: Success");
+				
+				[self listenToConnectedWatch];
 
 				if(successCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully launched app.", @"message", nil];
@@ -290,8 +289,6 @@ id updateHandler;
 
 -(void)killApp:(id)args
 {
-	NSLog(@"[INFO] TiPebble.killApp");
-
 	if(![self checkWatchConnected]) {
 		NSLog(@"[WARN] TiPebble.killApp: No watch connected");
 
@@ -302,6 +299,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
+		NSLog(@"[INFO] TiPebble.killApp");
+		
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -332,8 +331,6 @@ id updateHandler;
 
 -(void)sendMessage:(id)args
 {
-	NSLog(@"[INFO] TiPebble.sendMessage");
-
 	if(![self checkWatchConnected]) {
 		NSLog(@"[WARN] TiPebble.sendMessage: No watch connected");
 
@@ -344,6 +341,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
+		NSLog(@"[INFO] TiPebble.sendMessage");
+		
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
