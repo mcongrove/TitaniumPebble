@@ -47,23 +47,23 @@ id updateHandler;
 
 -(void)startup
 {
-	NSLog(@"[INFO] TiPebble.startup");
+	NSLog(@"[DEBUG] TiPebble.startup");
 
 	[super startup];
 
 	[[PBPebbleCentral defaultCentral] setDelegate:self];
 
 	connectedWatch = [[PBPebbleCentral defaultCentral] lastConnectedWatch];
-	
+
 	[self listenToConnectedWatch];
 }
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidConnect:(PBWatch*)watch isNew:(BOOL)isNew
 {
-	NSLog(@"[INFO] TiPebble.watchDidConnect: %@", [watch name]);
+	NSLog(@"[DEBUG] TiPebble.watchDidConnect: %@", [watch name]);
 
 	connectedWatch = watch;
-	
+
 	[self listenToConnectedWatch];
 
 	NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:[watch name], @"name", nil];
@@ -72,7 +72,7 @@ id updateHandler;
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidDisconnect:(PBWatch*)watch
 {
-	NSLog(@"[INFO] TiPebble.watchDidDisconnect: %@", [watch name]);
+	NSLog(@"[DEBUG] TiPebble.watchDidDisconnect: %@", [watch name]);
 
 	if(connectedWatch == watch || [watch isEqual:connectedWatch]) {
 		[connectedWatch closeSession:^{}];
@@ -87,16 +87,16 @@ id updateHandler;
 -(void)listenToConnectedWatch
 {
 	if(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.listenToConnectedWatch: Listening");
+		NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch: Listening");
 
 		if(updateHandler) {
 			[connectedWatch appMessagesRemoveUpdateHandler:updateHandler];
-	
+
 			updateHandler = nil;
 		}
 
 		updateHandler = [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *message) {
-			NSLog(@"[INFO] TiPebble.listenToConnectedWatch : Received message");
+			NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch : Received message");
 
 			[self fireEvent:@"update" withObject:@{ @"message": message[MESSAGE_KEY] }];
 
@@ -156,8 +156,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.connect");
-		
+		NSLog(@"[DEBUG] TiPebble.connect");
+
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -170,20 +170,20 @@ id updateHandler;
 		[connectedWatch appMessagesGetIsSupported:^(PBWatch *watch, BOOL isAppMessagesSupported) {
 			if(!isAppMessagesSupported) {
 				NSLog(@"[ERROR] TiPebble.connect: Watch does not support messages");
-				
+
 				if(errorCallback != nil) {
 					[self _fireEventToListener:@"error" withObject:nil listener:errorCallback thisObject:nil];
 				}
-	
+
 				return;
 			}
-			
-			NSLog(@"[INFO] TiPebble.connect: Messages supported");
-	
+
+			NSLog(@"[DEBUG] TiPebble.connect: Messages supported");
+
 			connectedWatch = watch;
-	
+
 			[self listenToConnectedWatch];
-			
+
 			if(successCallback != nil) {
 				[self _fireEventToListener:@"success" withObject:nil listener:successCallback thisObject:nil];
 			}
@@ -203,8 +203,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.getVersionInfo");
-		
+		NSLog(@"[DEBUG] TiPebble.getVersionInfo");
+
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -231,7 +231,7 @@ id updateHandler;
 			}
 		}
 		onTimeout:^(PBWatch *watch) {
-			NSLog(@"[INFO] Timed out trying to get version info from Pebble.");
+			NSLog(@"[DEBUG] Timed out trying to get version info from Pebble.");
 
 			if(errorCallback != nil) {
 				NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Timed out trying to get version info from Pebble.", @"message",nil];
@@ -254,8 +254,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.launchApp");
-		
+		NSLog(@"[DEBUG] TiPebble.launchApp");
+
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -267,8 +267,8 @@ id updateHandler;
 
 		[connectedWatch appMessagesLaunch:^(PBWatch *watch, NSError *error) {
 			if(!error) {
-				NSLog(@"[INFO] TiPebble.launchApp: Success");
-				
+				NSLog(@"[DEBUG] TiPebble.launchApp: Success");
+
 				[self listenToConnectedWatch];
 
 				if(successCallback != nil) {
@@ -299,8 +299,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.killApp");
-		
+		NSLog(@"[DEBUG] TiPebble.killApp");
+
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -312,7 +312,7 @@ id updateHandler;
 
 		[connectedWatch appMessagesKill:^(PBWatch *watch, NSError *error) {
 			if(!error) {
-				NSLog(@"[INFO] TiPebble.killApp: Success");
+				NSLog(@"[DEBUG] TiPebble.killApp: Success");
 				if(successCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully killed app.", @"message", nil];
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
@@ -341,8 +341,8 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[INFO] TiPebble.sendMessage");
-		
+		NSLog(@"[DEBUG] TiPebble.sendMessage");
+
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
 
@@ -376,7 +376,7 @@ id updateHandler;
 
 		[connectedWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
 			if(!error) {
-				NSLog(@"[INFO] TiPebble.sendMessage: Success");
+				NSLog(@"[DEBUG] TiPebble.sendMessage: Success");
 
 				[self _fireEventToListener:@"success" withObject:nil listener:successCallback thisObject:nil];
 			} else {
@@ -390,7 +390,7 @@ id updateHandler;
 
 -(void)sendImage:(id)args
 {
-	NSLog(@"[INFO] TiPebble.sendImage");
+	NSLog(@"[DEBUG] TiPebble.sendImage");
 
 	if(![self checkWatchConnected]) {
 		NSLog(@"[WARN] TiPebble.sendImage: No watch connected");
@@ -409,7 +409,7 @@ id updateHandler;
 }
 
 -(void)sendImageToPebble:(UIImage*)image withKey:(id)key {
-	NSLog(@"[INFO] TiPebble.sendImageToPebble");
+	NSLog(@"[DEBUG] TiPebble.sendImageToPebble");
 
 	uint8_t width = image.size.width;
 	uint8_t height = image.size.height;
@@ -418,8 +418,8 @@ id updateHandler;
 	PBBitmap* pbBitmap = [PBBitmap pebbleBitmapWithUIImage:image];
 	size_t length = [pbBitmap.pixelData length];
 
-	NSLog(@"[INFO] TiPebble.sendImageToPebble: Image size is %d x %d", width, height);
-	NSLog(@"[INFO] TiPebble.sendImageToPebble: Pixel data length is %zu", length);
+	NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Image size is %d x %d", width, height);
+	NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Pixel data length is %zu", length);
 
 	for(size_t i = 0; i < length; i += MAX_OUTGOING_SIZE-3) {
 		NSMutableData *outgoing = [[NSMutableData alloc] initWithCapacity:MAX_OUTGOING_SIZE];
@@ -433,7 +433,7 @@ id updateHandler;
 
 		++j;
 
-		NSLog(@"[INFO] TiPebble.sendImageToPebble: Enqueued %lu bytes", MIN(MAX_OUTGOING_SIZE-3, length - i));
+		NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Enqueued %lu bytes", MIN(MAX_OUTGOING_SIZE-3, length - i));
 	}
 }
 
