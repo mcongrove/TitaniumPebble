@@ -54,8 +54,6 @@ id updateHandler;
 	[[PBPebbleCentral defaultCentral] setDelegate:self];
 
 	connectedWatch = [[PBPebbleCentral defaultCentral] lastConnectedWatch];
-
-	[self listenToConnectedWatch];
 }
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidConnect:(PBWatch*)watch isNew:(BOOL)isNew
@@ -357,7 +355,7 @@ id updateHandler;
 		NSMutableArray *keys = [[message allKeys] mutableCopy];
 
 		for (NSString *key in keys) {
-			id obj = [message objectForKey: key];
+			id obj = [message objectForKey:key];
 
 			NSNumber *updateKey = @([key integerValue]);
 
