@@ -1,90 +1,29 @@
-// This is a test harness for your module
-// You should do something interesting in this harness 
-// to test out the module and to provide instructions 
-// to users on how to use it by example.
+var pebble = require("org.beuckman.tipebble");
 
-
-// open a single window
-var win = Ti.UI.createWindow({
-	backgroundColor:'white'
-});
-var label = Ti.UI.createLabel();
-win.add(label);
-win.open();
-
-
-var pebble = require('org.beuckman.tipebble');
-Ti.API.info("module is => " + pebble);
-
-// this demo uuid is from the pebble documentation
+// Pebble demo UUID; change to the UUID of your Pebble application
 pebble.setAppUUID("226834ae-786e-4302-a52f-6e7efc9f990b");
 
-
 function watchConnected(e) {
-    pebble.getVersionInfo({
-        success: function(e) {
-            alert(e);
-            launchApp();
-        },
-        error: function(e) {
-            alert("Error getting version info");
-            alert(e);
-        }
-    });
+	Ti.API.info("Watch Connected");
 }
-function watchDisonnected(e) {
-    alert("watchDisconnected");
+
+function watchDisconnected(e) {
+	Ti.API.info("Watch Disconnected");
+}
+
+function watchMessageReceived(_message) {
+	Ti.API.info("Message Received: " + _message.message);
 }
 
 pebble.addEventListener("watchConnected", watchConnected);
-pebble.addEventListener("watchDisconnected", watchDisonnected);
+pebble.addEventListener("watchDisconnected", watchDisconnected);
+pebble.addEventListener("update", watchMessageReceived);
 
-
-function launchApp() {
-  pebble.launchApp({
-      success: function(e) {
-          Ti.API.info("launched app");
-          setTimeout(killApp, 1000);
-      },
-      error: function(e) {
-          alert("Error launching app");
-      }
-  });
-}
-
-function killApp() {
-  pebble.killApp({
-      success: function(e) {
-          Ti.API.info("killed app");
-          alert(e);
-      },
-      error: function(e) {
-          alert("Error killing app");
-      }
-  });
-}
-
-function sendMessage() {
-  pebble.sendMessage({
-    message: {
-      0: 123,
-      1: 'TiPebble'
-    },
-    success: function(e) {
-      Ti.API.info(e);
-    },
-    error : function(e) {
-      Ti.API.error(e);
-    }
-  });
-}
-
-/*
-
-pebble.addEventListener("updateReceived", function(e) {
-    Ti.API.info("updateReceived");
-    Ti.API.info(e);
+pebble.connect({
+	success: function(_event) {
+		alert("Connected to Pebble");
+	},
+	error: function(_event) {
+		alert("Cannot connect to Pebble");
+	}
 });
-pebble.receiveUpdates(true);
-
-*/

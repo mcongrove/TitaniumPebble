@@ -1,39 +1,130 @@
-# TiPebble Module
+# TiPebble
 
-## Description
+For a complete guide on integrating TiPebble in your project, please refer to the README. This document is only a function reference.
 
-TODO: Enter your module description here
+## setAppUUID
 
-## Accessing the TiPebble Module
+Sets the Pebble application UUID.
 
-To access this module from JavaScript, you would do the following:
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| uuid | String | The Pebble application UUID |
 
-	var TiPebble = require("org.beuckman.tipebble");
+###### Return
+_None_
 
-The TiPebble variable is a reference to the Module object.	
+## checkWatchConnect
 
-## Reference
+Checks if a Pebble is connected to the mobile device.
 
-TODO: If your module has an API, you should document
-the reference here.
+###### Parameters
+_None_
 
-### ___PROJECTNAMEASIDENTIFIER__.function
+###### Return
+| Type | Value |
+|------|-------|
+| Boolean | Whether a watch is connected |
 
-TODO: This is an example of a module function.
+## connectedCount
 
-### ___PROJECTNAMEASIDENTIFIER__.property
+How many Pebble devices are connected to the mobile device.
 
-TODO: This is an example of a module property.
+###### Parameters
+_None_
 
-## Usage
+###### Return
+| Type | Value |
+|------|-------|
+| Number | The number of connected Pebbles |
 
-TODO: Enter your usage example here
+## connect
 
-## Author
+Connect to the Pebble watch.
 
-TODO: Enter your author name, email and other contact
-details you want to share here. 
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
 
-## License
+###### Return
+_None_
 
-TODO: Enter your license/legal information here.
+
+## getVersionInfo
+
+Retrieves version information from the Pebble.
+
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
+
+###### Return
+| Type | Value |
+|------|-------|
+| Object | The version information |
+
+
+## launchApp
+
+Launches the Pebble application on the watch.
+
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
+
+###### Return
+_None_
+
+## killApp
+
+Closes the Pebble application on the watch.
+
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
+
+###### Return
+_None_
+
+## sendMessage
+
+Sends a message to the Pebble.
+
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.message | Object | The message object (see README for formatting example) |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
+
+###### Return
+_None_
+
+## sendImage
+
+Sends an image to the Pebble.
+
+###### Parameters
+| Name | Type | Value |
+|------|------|-------|
+| params | Object |  |
+| params.image | String | The image data (see README for example) |
+| params.key | Number | The enum key used by the Pebble (see README for example) |
+| params.success | Function | The success callback |
+| params.error | Function | The error callback |
+
+###### Return
+_None_

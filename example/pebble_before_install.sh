@@ -20,11 +20,3 @@ cd ~/pebble-dev/${PEBBLE_SDK}
 tar -zxf ~/arm-cs-tools-ubuntu-universal.tar.gz
 
 export PATH=~/pebble-dev/PebbleSDK-${PEBBLE_SDK}/bin:$PATH
-
-
-
-
-
-
-
-
