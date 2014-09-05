@@ -2,7 +2,16 @@
 
 For a complete guide on integrating TiPebble in your project, please refer to the README. This document is only a function reference.
 
-## setAppUUID
+## prop: connectedCount
+
+How many Pebble devices are connected to the mobile device.
+
+###### Return
+| Type | Value |
+|------|-------|
+| Number | The number of connected Pebbles |
+
+## func: setAppUUID
 
 Sets the Pebble application UUID.
 
@@ -14,7 +23,7 @@ Sets the Pebble application UUID.
 ###### Return
 _None_
 
-## checkWatchConnect
+## func: checkWatchConnect
 
 Checks if a Pebble is connected to the mobile device.
 
@@ -26,19 +35,7 @@ _None_
 |------|-------|
 | Boolean | Whether a watch is connected |
 
-## connectedCount
-
-How many Pebble devices are connected to the mobile device.
-
-###### Parameters
-_None_
-
-###### Return
-| Type | Value |
-|------|-------|
-| Number | The number of connected Pebbles |
-
-## connect
+## func: connect
 
 Connect to the Pebble watch.
 
@@ -53,7 +50,7 @@ Connect to the Pebble watch.
 _None_
 
 
-## getVersionInfo
+## func: getVersionInfo
 
 Retrieves version information from the Pebble.
 
@@ -70,7 +67,7 @@ Retrieves version information from the Pebble.
 | Object | The version information |
 
 
-## launchApp
+## func: launchApp
 
 Launches the Pebble application on the watch.
 
@@ -84,7 +81,7 @@ Launches the Pebble application on the watch.
 ###### Return
 _None_
 
-## killApp
+## func: killApp
 
 Closes the Pebble application on the watch.
 
@@ -98,7 +95,7 @@ Closes the Pebble application on the watch.
 ###### Return
 _None_
 
-## sendMessage
+## func: sendMessage
 
 Sends a message to the Pebble.
 
@@ -113,7 +110,7 @@ Sends a message to the Pebble.
 ###### Return
 _None_
 
-## sendImage
+## func: sendImage
 
 Sends an image to the Pebble.
 
