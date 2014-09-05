@@ -191,9 +191,7 @@ static void init() {
 
 ```
 
-##### Send Images to Pebble #####
-
-![caution](http://img.shields.io/badge/experimental-feature-orange.svg)
+##### Send Images to Pebble ##### ![caution](http://img.shields.io/badge/experimental-feature-orange.svg)
 
 This requires your Pebble app to implement [image receiving code](https://github.com/jbeuckm/TiPebble/blob/master/example/pebble-app/src/tipebble.c#L50) as appears in the [example Pebble app](https://github.com/jbeuckm/TiPebble-Example-App). Images on the Pebble must have width a multiple of 32 pixels. If your image is not a multiple of 32 pixels wide, a black border will be added to the right, expanding to the next multiple of 32.
 
