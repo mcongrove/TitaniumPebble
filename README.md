@@ -2,17 +2,25 @@
 
 Implements basic features of the Pebble iOS SDK.
 
-![Pebble Screenshot](photo1.jpeg)
-
-## Quick Start
-
-[![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/org.beuckman.tipebble)
+## Downloading [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/org.beuckman.tipebble)
 
 Download the latest distribution ZIP-file and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
 `$ gittio install org.beuckman.tipebble`
 
-### Usage ###
+## Sample
+
+An example [Titanium Mobile](https://github.com/mcongrove/TiPebble-Example-Mobile) application and [Pebble](https://github.com/mcongrove/TiPebble-Example-Pebble) application are available for download.
+
+## Documentation
+
+Aside from the Quick Start guide below, you can also view the full module reference in the [documentation](https://github.com/mcongrove/TiPebble/blob/master/documentation/index.md).
+
+## Credits
+
+TiPebble developed by [Joe Beuckman](https://github.com/jbeuckm) with contributions from [Matthew Congrove](https://github.com/mcongrove).
+
+## Quick Start
 
 ##### Configuration #####
 
@@ -52,10 +60,10 @@ To connect to the Pebble:
 ```
 pebble.connect({
 	success: function(_event) {
-		alert("Connected to Pebble");
+		Ti.API.info("Connected to Pebble");
 	},
 	error: function(_event) {
-		alert("Cannot Connect to Pebble");
+		Ti.API.error("Cannot Connect to Pebble");
 	}
 });
 ```
@@ -86,10 +94,10 @@ To launch your Pebble application on the watch from your mobile application:
 ```
 pebble.launchApp({
 	success: function(_event) {
-		alert("Pebble Application Launched");
+		Ti.API.info("Pebble Application Launched");
 	},
 	error: function(_event) {
-		alert("Could Not Launch Pebble Application");
+		Ti.API.error("Could Not Launch Pebble Application");
 	}
 });
 ```
@@ -102,7 +110,7 @@ After you've connected, you can add an event listener to start watching for mess
 pebble.addEventListener("update", watchMessageReceived);
 
 function watchMessageReceived(_message) {
-	alert("Message Received: " + _message.message);
+	Ti.API.info("Message Received: " + _message.message);
 }
 ```
 
@@ -117,9 +125,7 @@ static void sendMessageToPhone() {
 		return;
 	}
 	
-	static char msg[64];
-	
-	strcpy(msg, "Hello, mobile app!");
+	static char message[64] = "Hello, mobile app!";
 	
 	dict_write_cstring(iter, 0, msg);
 	dict_write_end(iter);
@@ -182,30 +188,8 @@ static void init() {
 	app_message_register_outbox_sent(out_sent_handler);
 	app_message_register_outbox_failed(out_failed_handler);
 	
-	const uint32_t inbound_size = 64;
-	const uint32_t outbound_size = 64;
+	const uint32_t inbound_size = app_message_inbox_size_maximum();
+	const uint32_t outbound_size = app_message_outbox_size_maximum();
 	app_message_open(inbound_size, outbound_size);
-}
-
-```
-
-##### Send Images to Pebble ![caution](http://img.shields.io/badge/experimental-feature-orange.svg) #####
-
-This requires your Pebble app to implement [image receiving code](https://github.com/jbeuckm/TiPebble/blob/master/example/pebble-app/src/tipebble.c#L50) as appears in the [example Pebble app](https://github.com/jbeuckm/TiPebble-Example-App). Images on the Pebble must have width a multiple of 32 pixels. If your image is not a multiple of 32 pixels wide, a black border will be added to the right, expanding to the next multiple of 32.
-
-```
-function sendImage() {
-	var file = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "image.png");
-	
-	pebble.sendImage({
-		image : file.read(),
-		key: 2,
-		success: function(_event) {
-			alert("Image Sent");
-		},
-		error : function(_event) {
-			alert("Image Failed");
-		}
-	});
 }
 ```

@@ -1,6 +1,6 @@
 # TiPebble
 
-For a complete guide on integrating TiPebble in your project, please refer to the README. This document is only a function reference.
+For a complete guide on integrating TiPebble in your project, please refer to the [README](https://github.com/mcongrove/TiPebble/blob/master/README.md). This document is only a function reference.
 
 ## prop: connectedCount
 
@@ -104,22 +104,6 @@ Sends a message to the Pebble.
 |------|------|-------|
 | params | Object |  |
 | params.message | Object | The message object (see README for formatting example) |
-| params.success | Function | The success callback |
-| params.error | Function | The error callback |
-
-###### Return
-_None_
-
-## func: sendImage
-
-Sends an image to the Pebble.
-
-###### Parameters
-| Name | Type | Value |
-|------|------|-------|
-| params | Object |  |
-| params.image | String | The image data (see README for example) |
-| params.key | Number | The enum key used by the Pebble (see README for example) |
 | params.success | Function | The success callback |
 | params.error | Function | The error callback |
 
