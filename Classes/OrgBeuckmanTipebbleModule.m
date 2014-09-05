@@ -92,7 +92,7 @@ id updateHandler;
 		}
 
 		updateHandler = [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *message) {
-			NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch : Received message");
+			NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch: Received message");
 
 			[self fireEvent:@"update" withObject:@{ @"message": message[MESSAGE_KEY] }];
 
@@ -309,6 +309,7 @@ id updateHandler;
 		[connectedWatch appMessagesKill:^(PBWatch *watch, NSError *error) {
 			if(!error) {
 				NSLog(@"[DEBUG] TiPebble.killApp: Success");
+				
 				if(successCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully killed app.", @"message", nil];
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
@@ -381,55 +382,6 @@ id updateHandler;
 				[self _fireEventToListener:@"error" withObject:error listener:errorCallback thisObject:nil];
 			}
 		}];
-	}
-}
-
--(void)sendImage:(id)args
-{
-	NSLog(@"[DEBUG] TiPebble.sendImage");
-
-	if(![self checkWatchConnected]) {
-		NSLog(@"[WARN] TiPebble.sendImage: No watch connected");
-
-		return;
-	}
-
-	ENSURE_UI_THREAD_1_ARG(args);
-	ENSURE_SINGLE_ARG(args, NSDictionary);
-
-	TiBlob *blob = [args objectForKey:@"image"];
-	UIImage *image = [blob image];
-
-	NSInteger updateKey = [TiUtils intValue:[args objectForKey:@"key"]];
-	[self sendImageToPebble:image withKey: @(updateKey)];
-}
-
--(void)sendImageToPebble:(UIImage*)image withKey:(id)key {
-	NSLog(@"[DEBUG] TiPebble.sendImageToPebble");
-
-	uint8_t width = image.size.width;
-	uint8_t height = image.size.height;
-	uint8_t j = 0;
-
-	PBBitmap* pbBitmap = [PBBitmap pebbleBitmapWithUIImage:image];
-	size_t length = [pbBitmap.pixelData length];
-
-	NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Image size is %d x %d", width, height);
-	NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Pixel data length is %zu", length);
-
-	for(size_t i = 0; i < length; i += MAX_OUTGOING_SIZE-3) {
-		NSMutableData *outgoing = [[NSMutableData alloc] initWithCapacity:MAX_OUTGOING_SIZE];
-
-		[outgoing appendBytes:&j length:1];
-		[outgoing appendBytes:&width length:1];
-		[outgoing appendBytes:&height length:1];
-		[outgoing appendData:[pbBitmap.pixelData subdataWithRange:NSMakeRange(i, MIN(MAX_OUTGOING_SIZE-3, length - i))]];
-
-		[pebbleDataQueue enqueue:@{key: outgoing}];
-
-		++j;
-
-		NSLog(@"[DEBUG] TiPebble.sendImageToPebble: Enqueued %lu bytes", MIN(MAX_OUTGOING_SIZE-3, length - i));
 	}
 }
 

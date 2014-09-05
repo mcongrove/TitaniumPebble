@@ -1,6 +1,4 @@
-# TiPebble #
-
-[![Build Status](https://travis-ci.org/jbeuckm/TiPebble.png)](https://travis-ci.org/jbeuckm/TiPebble)
+# TiPebble
 
 Implements basic features of the Pebble iOS SDK.
 

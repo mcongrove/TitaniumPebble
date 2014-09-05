@@ -6,7 +6,7 @@ version: 0.6.0
 apiversion: 2
 description: Implements basic features of the Pebble iOS SDK.
 author: Joe Beuckman
-license: Don't read software licenses. Don't write software licenses.
+license: 
 copyright: no
 
 # these should not be edited
