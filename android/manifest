@@ -1,0 +1,18 @@
+#
+# this is your module manifest and used by Titanium
+# during compilation, packaging, distribution, etc.
+#
+version: 1.0.0
+apiversion: 2
+description: Pebble Android SDK
+author: Alexander Conway (Logical Labs) and Jon Alter
+license: Apache License, Version 2.0
+copyright: Copyright (c) 2010-2014 by Appcelerator,  Inc.
+
+
+# these should not be edited
+name: TiPebble
+moduleid: org.beuckman.tipebble
+guid: 01b0607f-455b-4c1e-8f26-a07128d90089
+platform: android
+minsdk: 3.2.2.GA
