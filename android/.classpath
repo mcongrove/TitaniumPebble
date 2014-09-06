@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.2.2.GA/android/js.jar"/>
 	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.2.2.GA/android/kroll-apt.jar"/>
 	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/3.2.2.GA/android/kroll-common.jar"/>
+	<classpathentry kind="lib" path="lib/guava-14.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/tipebble-sdk.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

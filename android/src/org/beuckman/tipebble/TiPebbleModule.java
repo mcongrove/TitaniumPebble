@@ -10,10 +10,11 @@ package org.beuckman.tipebble;
 
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-
-import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.appcelerator.titanium.TiApplication;
+
+import com.getpebble.android.kit.PebbleKit;
 
 
 @Kroll.module(name="TiPebble", id="org.beuckman.tipebble")
@@ -44,6 +45,9 @@ public class TiPebbleModule extends KrollModule
     public String example()
     {
         Log.d(LCAT, "example called");
+        
+        Log.i(LCAT, "############## areAppMessagesSupported: " + PebbleKit.areAppMessagesSupported(TiApplication.getAppRootOrCurrentActivity()));
+        
         return "hello world";
     }
     
