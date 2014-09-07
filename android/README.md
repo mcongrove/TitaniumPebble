@@ -1,18 +1,15 @@
-README
-=======
+# TiPebble Android Build Notes
 
-Put the build.xml from the `Utils` folder in the root of the Android Pebble Kit
+Because the Pebble SDK does not include a JAR file, we must create one for use in the Titanium Android module for TiPebble.
 
-Copy the build.properties.example file in the module and name it build.properties
-also, copy that file next to build.xml in the root of the Android Pebble Kit.
-build.properties needs to be in the root of the android module and in APK.
-
-From the terminal go to the root of Android Pebble Kit and run ant.
-'$ ant'
-This will generate a file named `pebble-sdk.jar`.
-
-Copy the `pebble-sdk.jar` and any jars from the libs folder of the APK project into the lib folder of the android module
-
-Build the anroid module
-`$ ant`
-The built module will be in `dist`.
+ * Place the `{MODULE}/utils/build.xml` in the root of the PebbleKit-Android directory
+ * Copy the `{MODULE}/build.properties.example` file to the root of the PebbleKit-Android directory
+ 	* Rename to `{PEBBLEKIT}/build.properties`
+ * Copy the `{MODULE}/build.properties.example` file to the root of the Android module
+ 	* Rename to `{MODULE}/build.properties`
+ * Open terminal and navigate to the root of the PebbleKit-Android directory
+ 	* Run `$ ant`
+ 		* This will generate a file named `{PEBBLEKIT}/lib/pebble-sdk.jar`
+ * Copy `{PEBBLEKIT}/lib/pebble-sdk.jar` (and any other JAR files from the `libs` folder) into `{MODULE}/lib`
+ * Build the Android module by running `$ ant`
+ 	* The module will be built to `{MODULE}/dist`
