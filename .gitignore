@@ -19,3 +19,7 @@ build.properties
 .idea/
 libs/
 /android/dist/tipebble.jar
+
+/android/dist
+
+/iphone/dist
