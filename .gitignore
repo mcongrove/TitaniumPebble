@@ -23,3 +23,7 @@ libs/
 /android/dist
 
 /iphone/dist
+
+/iphone/documentation/index.md
+
+/android/documentation/index.md
