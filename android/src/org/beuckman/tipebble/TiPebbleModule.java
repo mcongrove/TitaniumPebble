@@ -23,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import java.util.UUID;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Iterator;
 import com.getpebble.android.kit.PebbleKit;
 
 @Kroll.module(name="TiPebble", id="org.beuckman.tipebble")
@@ -277,6 +279,14 @@ public class TiPebbleModule extends KrollModule
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		final Object message = args.get("message");
-		KrollDict messageDict = new KrollDict(message);
+		Map<Integer, Object> messageHash = (HashMap<Integer, Object>) message;
+		
+		Iterator<Map.Entry<Integer, Object>> entries = messageHash.entrySet().iterator();
+		
+		while(entries.hasNext())
+		{
+			Map.Entry<Integer, Object> entry = entries.next();
+		    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+		}
 	}
 }
