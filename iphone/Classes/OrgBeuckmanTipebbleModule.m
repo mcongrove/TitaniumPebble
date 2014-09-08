@@ -212,7 +212,7 @@ id updateHandler;
 			if(successCallback != nil) {
 				NSDictionary *versionInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:
 				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.major], @"major",
-				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.minor], @"minor"
+				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.minor], @"minor"];
 
 				[self _fireEventToListener:@"success" withObject:versionInfoDict listener:successCallback thisObject:nil];
 			}

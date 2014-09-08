@@ -27,6 +27,7 @@ public class TiPebbleModule extends KrollModule
 {
 	private static final String LCAT = "TiPebble";
 	private static UUID uuid;
+	private int connectedCount = 0;
 	private static boolean isListeningToPebble = false;
 	
 	private BroadcastReceiver connectedReceiver = null;
@@ -129,91 +130,116 @@ public class TiPebbleModule extends KrollModule
 	@Kroll.method
 	private void addReceivers()
 	{
-		connectedReceiver = new BroadcastReceiver()
-		{
-			@Override
-			public void onReceive(Context context, Intent intent)
-			{
-				Log.d(LCAT, "watchDidConnect");
-				fireEvent("watchConnected", new Object[] {});
-			}
-		};
-		
-		disconnectedReceiver = new BroadcastReceiver()
-		{
-			@Override
-			public void onReceive(Context context, Intent intent)
-			{
-				Log.d(LCAT, "watchDidDisconnect");
-				fireEvent("watchDisconnected", new Object[] {});
-			}
-		};
-		
-		dataReceiver = new PebbleKit.PebbleDataReceiver(uuid)
-		{
-			@Override
-			public void receiveData(final Context context, final int transactionId, final PebbleDictionary data)
-			{
-				if(!data.contains(0))
-				{
-					Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
-					
-					PebbleKit.sendNackToPebble(context, transactionId);
-					
-					return;
-				}
-
-				PebbleKit.sendAckToPebble(context, transactionId);
-				
-				try
-				{
-					JSONArray jsonArray = new JSONArray(data.toJsonString());
-					
-					if(jsonArray.length() > 0)
-					{
-						JSONObject jsonObject = jsonArray.getJSONObject(0);
-						
-						if(jsonObject.has("value"))
-						{
-							Log.i(LCAT, "listenToConnectedWatch: Received message");
-							
-							HashMap message = new HashMap();
-							message.put("message", jsonObject.getString("value"));
-							
-							fireEvent("update", message);
-						}
-					}
-				} catch(Throwable e) {
-					Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
-				}
-			}
-		};
-		
-		ackReceiver = new PebbleKit.PebbleAckReceiver(uuid)
-		{
-			@Override
-			public void receiveAck(Context context, int transactionId)
-			{
-				Log.i(LCAT, "Received ACK");
-			}
-		};
-		
-		nackReceiver = new PebbleKit.PebbleNackReceiver(uuid)
-		{
-			@Override
-			public void receiveNack(Context context, int transactionId)
-			{
-				Log.i(LCAT, "Received NACK");
-			}
-		};
-		
 		if(isListeningToPebble)
 		{
-			PebbleKit.registerPebbleConnectedReceiver(getApplicationContext(), connectedReceiver);
-			PebbleKit.registerPebbleDisconnectedReceiver(getApplicationContext(), disconnectedReceiver);
-			PebbleKit.registerReceivedDataHandler(getApplicationContext(), dataReceiver);
-			PebbleKit.registerReceivedAckHandler(getApplicationContext(), ackReceiver);
-			PebbleKit.registerReceivedNackHandler(getApplicationContext(), nackReceiver);
+			if(connectedReceiver == null)
+			{
+				connectedReceiver = new BroadcastReceiver()
+				{
+					@Override
+					public void onReceive(Context context, Intent intent)
+					{
+						Log.d(LCAT, "watchDidConnect");
+
+						setConnectedCount(0);
+						
+						fireEvent("watchConnected", new Object[] {});
+					}
+				};
+				
+				PebbleKit.registerPebbleConnectedReceiver(getApplicationContext(), connectedReceiver);
+			}
+			
+			if(disconnectedReceiver == null)
+			{
+				disconnectedReceiver = new BroadcastReceiver()
+				{
+					@Override
+					public void onReceive(Context context, Intent intent)
+					{
+						Log.d(LCAT, "watchDidDisconnect");
+						
+						setConnectedCount(0);
+						
+						fireEvent("watchDisconnected", new Object[] {});
+					}
+				};
+				
+				PebbleKit.registerPebbleDisconnectedReceiver(getApplicationContext(), disconnectedReceiver);
+			}
+			
+			if(dataReceiver == null)
+			{
+				dataReceiver = new PebbleKit.PebbleDataReceiver(uuid)
+				{
+					@Override
+					public void receiveData(final Context context, final int transactionId, final PebbleDictionary data)
+					{
+						if(!data.contains(0))
+						{
+							Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
+							
+							PebbleKit.sendNackToPebble(context, transactionId);
+							
+							return;
+						}
+
+						PebbleKit.sendAckToPebble(context, transactionId);
+						
+						try
+						{
+							JSONArray jsonArray = new JSONArray(data.toJsonString());
+							
+							if(jsonArray.length() > 0)
+							{
+								JSONObject jsonObject = jsonArray.getJSONObject(0);
+								
+								if(jsonObject.has("value"))
+								{
+									Log.i(LCAT, "listenToConnectedWatch: Received message");
+									
+									HashMap message = new HashMap();
+									message.put("message", jsonObject.getString("value"));
+									
+									fireEvent("update", message);
+								}
+							}
+						} catch(Throwable e) {
+							Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
+						}
+					}
+				};
+				
+				PebbleKit.registerReceivedDataHandler(getApplicationContext(), dataReceiver);
+			}
+			
+			if(ackReceiver == null)
+			{
+				ackReceiver = new PebbleKit.PebbleAckReceiver(uuid)
+				{
+					@Override
+					public void receiveAck(Context context, int transactionId)
+					{
+						Log.i(LCAT, "Received ACK");
+					}
+				};
+				
+				PebbleKit.registerReceivedAckHandler(getApplicationContext(), ackReceiver);
+			}
+			
+			if(nackReceiver == null)
+			{
+				nackReceiver = new PebbleKit.PebbleNackReceiver(uuid)
+				{
+					@Override
+					public void receiveNack(Context context, int transactionId)
+					{
+						Log.i(LCAT, "Received NACK");
+					}
+				};
+				
+				PebbleKit.registerReceivedNackHandler(getApplicationContext(), nackReceiver);
+			}
 		}
 	}
 
@@ -241,14 +267,20 @@ public class TiPebbleModule extends KrollModule
 		}
 	}
 	
-	@Kroll.method
-	public int connectedCount()
+	@Kroll.getProperty @Kroll.method
+	public int getConnectedCount()
+	{
+		return connectedCount;
+	}
+	
+	@Kroll.setProperty @Kroll.method
+	public void setConnectedCount(int ignore)
 	{
 		if(checkWatchConnected())
 		{
-			return 1;
+			connectedCount = 1;
 		} else {
-			return 0;
+			connectedCount = 0;
 		}
 	}
 	
@@ -272,6 +304,7 @@ public class TiPebbleModule extends KrollModule
 			return;
 		}
 		
+		setConnectedCount(0);
 		listenToConnectedWatch();
 		
 		Log.d(LCAT, "connect: Messages supported");
@@ -443,4 +476,6 @@ public class TiPebbleModule extends KrollModule
 /*
 	TODO:
 		- Map ACK/NACK handler to sendMessage so it can fire success/error callback for each message
+		- Queue messages in sendMessage to avoid overflowing Pebble channel
+		- Figure out why unregisterReceiver symbol isn't being found
 */
