@@ -1,10 +1,10 @@
 # TiPebble
 
-Implements basic features of the Pebble iOS SDK.
+Implements basic features of the Pebble SDK for iOS and Android.
 
 ## Downloading [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/org.beuckman.tipebble)
 
-Download the latest distribution ZIP-file and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+Download the latest distribution ZIP-file in `/dist` and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
 `$ gittio install org.beuckman.tipebble`
 
@@ -18,11 +18,11 @@ Aside from the Quick Start guide below, you can also view the full module refere
 
 ## Credits
 
-TiPebble developed by [Joe Beuckman](https://github.com/jbeuckm) with contributions from [Matthew Congrove](https://github.com/mcongrove).
+TiPebble iOS module originally developed by [Joe Beuckman](https://github.com/jbeuckm); contributions and Android module by [Matthew Congrove](https://github.com/mcongrove); contributions by [Jon Alter](https://github.com/jonalter) and [Chris Bowley](https://github.com/fridayforward).
 
 ## Quick Start
 
-##### Configuration #####
+##### Configuration - iOS#####
 
 Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 
@@ -193,3 +193,8 @@ static void init() {
 	app_message_open(inbound_size, outbound_size);
 }
 ```
+
+## To-Do
+
+ * Map ACK/NACK handlers to transactions in Android module
+ * Demonstrate and document Android background connectivity
