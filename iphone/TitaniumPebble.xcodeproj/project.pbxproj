@@ -22,16 +22,16 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		24DD6CF91134B3F500162E58 /* OrgBeuckmanTipebbleModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DD6CF71134B3F500162E58 /* OrgBeuckmanTipebbleModule.h */; };
-		24DD6CFA1134B3F500162E58 /* OrgBeuckmanTipebbleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DD6CF81134B3F500162E58 /* OrgBeuckmanTipebbleModule.m */; };
-		24DE9E1111C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = 24DE9E0F11C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.h */; };
-		24DE9E1211C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = 24DE9E1011C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.m */; };
 		6E2DDEEA1940CAB300B737F3 /* PebbleKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2DDEE81940CAB300B737F3 /* PebbleKit.framework */; };
 		6E2DDEEB1940CAB300B737F3 /* PebbleVendor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E2DDEE91940CAB300B737F3 /* PebbleVendor.framework */; };
-		AA747D9F0F9514B9006C5449 /* OrgBeuckmanTipebble_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* OrgBeuckmanTipebble_Prefix.pch */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		D017E2B5199C6A0600084D76 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D017E2B4199C6A0600084D76 /* CoreGraphics.framework */; };
 		D017E2B7199C6A1900084D76 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D017E2B6199C6A1900084D76 /* UIKit.framework */; };
+		D08DDFC719BE1DDD0016BBC0 /* ComMcongrovePebbleModule.h in Headers */ = {isa = PBXBuildFile; fileRef = D08DDFC319BE1DDD0016BBC0 /* ComMcongrovePebbleModule.h */; };
+		D08DDFC819BE1DDD0016BBC0 /* ComMcongrovePebbleModule.m in Sources */ = {isa = PBXBuildFile; fileRef = D08DDFC419BE1DDD0016BBC0 /* ComMcongrovePebbleModule.m */; };
+		D08DDFC919BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.h in Headers */ = {isa = PBXBuildFile; fileRef = D08DDFC519BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.h */; };
+		D08DDFCA19BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.m in Sources */ = {isa = PBXBuildFile; fileRef = D08DDFC619BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.m */; };
+		D08DDFCC19BE1DEE0016BBC0 /* ComMcongrovePebble_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = D08DDFCB19BE1DEE0016BBC0 /* ComMcongrovePebble_Prefix.pch */; };
 		D834576B19400737000D8E87 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D834576519400737000D8E87 /* CFNetwork.framework */; };
 		D834576C19400737000D8E87 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D834576619400737000D8E87 /* CoreBluetooth.framework */; };
 		D834576D19400737000D8E87 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D834576719400737000D8E87 /* CoreLocation.framework */; };
@@ -47,23 +47,23 @@
 			containerPortal = 0867D690FE84028FC02AAC07 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
-			remoteInfo = TiPebble;
+			remoteInfo = TitaniumPebble;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24DD6CF71134B3F500162E58 /* OrgBeuckmanTipebbleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrgBeuckmanTipebbleModule.h; path = Classes/OrgBeuckmanTipebbleModule.h; sourceTree = "<group>"; };
-		24DD6CF81134B3F500162E58 /* OrgBeuckmanTipebbleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrgBeuckmanTipebbleModule.m; path = Classes/OrgBeuckmanTipebbleModule.m; sourceTree = "<group>"; };
 		24DD6D1B1134B66800162E58 /* titanium.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = titanium.xcconfig; sourceTree = "<group>"; };
-		24DE9E0F11C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrgBeuckmanTipebbleModuleAssets.h; path = Classes/OrgBeuckmanTipebbleModuleAssets.h; sourceTree = "<group>"; };
-		24DE9E1011C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrgBeuckmanTipebbleModuleAssets.m; path = Classes/OrgBeuckmanTipebbleModuleAssets.m; sourceTree = "<group>"; };
 		6E2DDEE81940CAB300B737F3 /* PebbleKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleKit.framework; path = "../../../pebble-dev/PebbleSDK-2.3/PebbleKit-iOS/PebbleKit.framework"; sourceTree = "<group>"; };
 		6E2DDEE91940CAB300B737F3 /* PebbleVendor.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PebbleVendor.framework; path = "../../../pebble-dev/PebbleSDK-2.3/PebbleKit-iOS/PebbleVendor.framework"; sourceTree = "<group>"; };
-		AA747D9E0F9514B9006C5449 /* OrgBeuckmanTipebble_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrgBeuckmanTipebble_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D017E2B4199C6A0600084D76 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		D017E2B6199C6A1900084D76 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		D2AAC07E0554694100DB518D /* libOrgBeuckmanTipebble.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOrgBeuckmanTipebble.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D08DDFC319BE1DDD0016BBC0 /* ComMcongrovePebbleModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComMcongrovePebbleModule.h; path = Classes/ComMcongrovePebbleModule.h; sourceTree = "<group>"; };
+		D08DDFC419BE1DDD0016BBC0 /* ComMcongrovePebbleModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComMcongrovePebbleModule.m; path = Classes/ComMcongrovePebbleModule.m; sourceTree = "<group>"; };
+		D08DDFC519BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ComMcongrovePebbleModuleAssets.h; path = Classes/ComMcongrovePebbleModuleAssets.h; sourceTree = "<group>"; };
+		D08DDFC619BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ComMcongrovePebbleModuleAssets.m; path = Classes/ComMcongrovePebbleModuleAssets.m; sourceTree = "<group>"; };
+		D08DDFCB19BE1DEE0016BBC0 /* ComMcongrovePebble_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComMcongrovePebble_Prefix.pch; sourceTree = "<group>"; };
+		D2AAC07E0554694100DB518D /* libComMcongrovePebble.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libComMcongrovePebble.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D834576519400737000D8E87 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D834576619400737000D8E87 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D834576719400737000D8E87 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -99,12 +99,12 @@
 		034768DFFF38A50411DB9C8B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D2AAC07E0554694100DB518D /* libOrgBeuckmanTipebble.a */,
+				D2AAC07E0554694100DB518D /* libComMcongrovePebble.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0867D691FE84028FC02AAC07 /* TiPebble */ = {
+		0867D691FE84028FC02AAC07 /* TitaniumPebble */ = {
 			isa = PBXGroup;
 			children = (
 				08FB77AEFE84172EC02AAC07 /* Classes */,
@@ -112,7 +112,7 @@
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
 				034768DFFF38A50411DB9C8B /* Products */,
 			);
-			name = TiPebble;
+			name = TitaniumPebble;
 			sourceTree = "<group>";
 		};
 		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
@@ -137,10 +137,10 @@
 		08FB77AEFE84172EC02AAC07 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				24DE9E0F11C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.h */,
-				24DE9E1011C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.m */,
-				24DD6CF71134B3F500162E58 /* OrgBeuckmanTipebbleModule.h */,
-				24DD6CF81134B3F500162E58 /* OrgBeuckmanTipebbleModule.m */,
+				D08DDFC319BE1DDD0016BBC0 /* ComMcongrovePebbleModule.h */,
+				D08DDFC419BE1DDD0016BBC0 /* ComMcongrovePebbleModule.m */,
+				D08DDFC519BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.h */,
+				D08DDFC619BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -148,7 +148,7 @@
 		32C88DFF0371C24200C91783 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
-				AA747D9E0F9514B9006C5449 /* OrgBeuckmanTipebble_Prefix.pch */,
+				D08DDFCB19BE1DEE0016BBC0 /* ComMcongrovePebble_Prefix.pch */,
 				24DD6D1B1134B66800162E58 /* titanium.xcconfig */,
 			);
 			name = "Other Sources";
@@ -161,18 +161,18 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA747D9F0F9514B9006C5449 /* OrgBeuckmanTipebble_Prefix.pch in Headers */,
-				24DD6CF91134B3F500162E58 /* OrgBeuckmanTipebbleModule.h in Headers */,
-				24DE9E1111C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.h in Headers */,
+				D08DDFCC19BE1DEE0016BBC0 /* ComMcongrovePebble_Prefix.pch in Headers */,
+				D08DDFC919BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.h in Headers */,
+				D08DDFC719BE1DDD0016BBC0 /* ComMcongrovePebbleModule.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		D2AAC07D0554694100DB518D /* TiPebble */ = {
+		D2AAC07D0554694100DB518D /* TitaniumPebble */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiPebble" */;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TitaniumPebble" */;
 			buildPhases = (
 				D2AAC07A0554694100DB518D /* Headers */,
 				D2AAC07B0554694100DB518D /* Sources */,
@@ -182,9 +182,9 @@
 			);
 			dependencies = (
 			);
-			name = TiPebble;
-			productName = TiPebble;
-			productReference = D2AAC07E0554694100DB518D /* libOrgBeuckmanTipebble.a */;
+			name = TitaniumPebble;
+			productName = TitaniumPebble;
+			productReference = D2AAC07E0554694100DB518D /* libComMcongrovePebble.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -194,7 +194,7 @@
 			isa = PBXProject;
 			attributes = {
 			};
-			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiPebble" */;
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TitaniumPebble" */;
 			compatibilityVersion = "Xcode 3.1";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -204,12 +204,12 @@
 				French,
 				German,
 			);
-			mainGroup = 0867D691FE84028FC02AAC07 /* TiPebble */;
+			mainGroup = 0867D691FE84028FC02AAC07 /* TitaniumPebble */;
 			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D2AAC07D0554694100DB518D /* TiPebble */,
+				D2AAC07D0554694100DB518D /* TitaniumPebble */,
 				24416B8111C4CA220047AFDD /* Build & Test */,
 			);
 		};
@@ -236,8 +236,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24DD6CFA1134B3F500162E58 /* OrgBeuckmanTipebbleModule.m in Sources */,
-				24DE9E1211C5FE74003F90F6 /* OrgBeuckmanTipebbleModuleAssets.m in Sources */,
+				D08DDFC819BE1DDD0016BBC0 /* ComMcongrovePebbleModule.m in Sources */,
+				D08DDFCA19BE1DDD0016BBC0 /* ComMcongrovePebbleModuleAssets.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,7 +246,7 @@
 /* Begin PBXTargetDependency section */
 		24416B8511C4CA280047AFDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = D2AAC07D0554694100DB518D /* TiPebble */;
+			target = D2AAC07D0554694100DB518D /* TitaniumPebble */;
 			targetProxy = 24416B8411C4CA280047AFDD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -260,7 +260,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/OrgBeuckmanTipebble.dst;
+				DSTROOT = /tmp/ComMcongrovePebble.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -271,7 +271,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OrgBeuckmanTipebble_Prefix.pch;
+				GCC_PREFIX_HEADER = ComMcongrovePebble_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -291,7 +291,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrgBeuckmanTipebble;
+				PRODUCT_NAME = ComMcongrovePebble;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -307,7 +307,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
-				DSTROOT = /tmp/OrgBeuckmanTipebble.dst;
+				DSTROOT = /tmp/ComMcongrovePebble.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -318,7 +318,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OrgBeuckmanTipebble_Prefix.pch;
+				GCC_PREFIX_HEADER = ComMcongrovePebble_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -335,7 +335,7 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)";
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrgBeuckmanTipebble;
+				PRODUCT_NAME = ComMcongrovePebble;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -348,11 +348,11 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DSTROOT = /tmp/OrgBeuckmanTipebble.dst;
+				DSTROOT = /tmp/ComMcongrovePebble.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OrgBeuckmanTipebble_Prefix.pch;
+				GCC_PREFIX_HEADER = ComMcongrovePebble_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -371,7 +371,7 @@
 					"-DTI_POST_1_2",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrgBeuckmanTipebble;
+				PRODUCT_NAME = ComMcongrovePebble;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -385,11 +385,11 @@
 			baseConfigurationReference = 24DD6D1B1134B66800162E58 /* titanium.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				DSTROOT = /tmp/OrgBeuckmanTipebble.dst;
+				DSTROOT = /tmp/ComMcongrovePebble.dst;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = OrgBeuckmanTipebble_Prefix.pch;
+				GCC_PREFIX_HEADER = ComMcongrovePebble_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TI_VERSION=$(TI_VERSION)";
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = "";
@@ -405,7 +405,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_CFLAGS = "-DTI_POST_1_2";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = OrgBeuckmanTipebble;
+				PRODUCT_NAME = ComMcongrovePebble;
 				RUN_CLANG_STATIC_ANALYZER = NO;
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -438,7 +438,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TiPebble" */ = {
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "TitaniumPebble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB921F08733DC00010E9CD /* Debug */,
@@ -447,7 +447,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TiPebble" */ = {
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "TitaniumPebble" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1DEB922308733DC00010E9CD /* Debug */,

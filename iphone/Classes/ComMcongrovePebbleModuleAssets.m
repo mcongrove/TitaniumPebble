@@ -1,11 +1,11 @@
 /**
  * This is a generated file. Do not edit or your changes will be lost
  */
-#import "OrgBeuckmanTipebbleModuleAssets.h"
+#import "ComMcongrovePebbleModuleAssets.h"
 
 extern NSData* filterDataInRange(NSData* thedata, NSRange range);
 
-@implementation OrgBeuckmanTipebbleModuleAssets
+@implementation ComMcongrovePebbleModuleAssets
 
 - (NSData*) moduleAsset
 {

@@ -1,6 +1,6 @@
-# TiPebble Android Build Notes
+# TitaniumPebble Android Build Notes
 
-Because the Pebble SDK does not include a JAR file, we must create one for use in the Titanium Android module for TiPebble.
+Because the Pebble SDK does not include a JAR file, we must create one for use in the Titanium Android module for TitaniumPebble.
 
  * Place the `{MODULE}/utils/build.xml.example` in the root of the PebbleKit-Android directory
  	* Rename to `{PEBBLEKIT}/build.xml`

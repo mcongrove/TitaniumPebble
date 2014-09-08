@@ -1,8 +1,20 @@
 /**
- * Appcelerator Titanium is Copyright (c) 2009-2010 by Appcelerator, Inc.
- * and licensed under the Apache Public License (version 2)
+ * Copyright 2014 Matthew Congrove
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-#import "OrgBeuckmanTipebbleModule.h"
+
+#import "ComMcongrovePebbleModule.h"
 #import "TiBase.h"
 #import "TiHost.h"
 #import "TiUtils.h"
@@ -12,7 +24,7 @@
 
 id updateHandler;
 
-@implementation OrgBeuckmanTipebbleModule
+@implementation ComMcongrovePebbleModule
 
 #pragma mark Internal
 
@@ -23,7 +35,7 @@ id updateHandler;
 
 -(NSString*)moduleId
 {
-	return @"org.beuckman.tipebble";
+	return @"com.mcongrove.pebble";
 }
 
 #pragma mark Cleanup 
@@ -45,7 +57,7 @@ id updateHandler;
 
 -(void)startup
 {
-	NSLog(@"[DEBUG] TiPebble.startup");
+	NSLog(@"[DEBUG] Pebble.startup");
 
 	[super startup];
 
@@ -56,7 +68,7 @@ id updateHandler;
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidConnect:(PBWatch*)watch isNew:(BOOL)isNew
 {
-	NSLog(@"[DEBUG] TiPebble.watchDidConnect: %@", [watch name]);
+	NSLog(@"[DEBUG] Pebble.watchDidConnect: %@", [watch name]);
 
 	connectedWatch = watch;
 
@@ -68,7 +80,7 @@ id updateHandler;
 
 -(void)pebbleCentral:(PBPebbleCentral*)central watchDidDisconnect:(PBWatch*)watch
 {
-	NSLog(@"[DEBUG] TiPebble.watchDidDisconnect: %@", [watch name]);
+	NSLog(@"[DEBUG] Pebble.watchDidDisconnect: %@", [watch name]);
 
 	if(connectedWatch == watch || [watch isEqual:connectedWatch]) {
 		[connectedWatch closeSession:^{}];
@@ -83,7 +95,7 @@ id updateHandler;
 -(void)listenToConnectedWatch
 {
 	if(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch: Listening");
+		NSLog(@"[DEBUG] Pebble.listenToConnectedWatch: Listening");
 
 		if(updateHandler) {
 			[connectedWatch appMessagesRemoveUpdateHandler:updateHandler];
@@ -92,14 +104,14 @@ id updateHandler;
 		}
 
 		updateHandler = [connectedWatch appMessagesAddReceiveUpdateHandler:^BOOL(PBWatch *watch, NSDictionary *message) {
-			NSLog(@"[DEBUG] TiPebble.listenToConnectedWatch: Received message");
+			NSLog(@"[DEBUG] Pebble.listenToConnectedWatch: Received message");
 
 			[self fireEvent:@"update" withObject:@{ @"message": message[MESSAGE_KEY] }];
 
 			return YES;
 		}];
 	} else {
-		NSLog(@"[WARN] TiPebble.listenToConnectedWatch: No watch connected, not listening");
+		NSLog(@"[WARN] Pebble.listenToConnectedWatch: No watch connected, not listening");
 	}
 }
 
@@ -126,7 +138,7 @@ id updateHandler;
 -(BOOL)checkWatchConnected
 {
 	if(connectedWatch == nil) {
-		NSLog(@"[WARN] TiPebble.checkWatchConnected: No watch connected");
+		NSLog(@"[WARN] Pebble.checkWatchConnected: No watch connected");
 
 		return FALSE;
 	} else {
@@ -147,7 +159,7 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.connect");
+		NSLog(@"[DEBUG] Pebble.connect");
 
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
@@ -160,7 +172,7 @@ id updateHandler;
 
 		[connectedWatch appMessagesGetIsSupported:^(PBWatch *watch, BOOL isAppMessagesSupported) {
 			if(!isAppMessagesSupported) {
-				NSLog(@"[ERROR] TiPebble.connect: Watch does not support messages");
+				NSLog(@"[ERROR] Pebble.connect: Watch does not support messages");
 
 				if(errorCallback != nil) {
 					[self _fireEventToListener:@"error" withObject:nil listener:errorCallback thisObject:nil];
@@ -169,7 +181,7 @@ id updateHandler;
 				return;
 			}
 
-			NSLog(@"[DEBUG] TiPebble.connect: Messages supported");
+			NSLog(@"[DEBUG] Pebble.connect: Messages supported");
 
 			connectedWatch = watch;
 
@@ -185,7 +197,7 @@ id updateHandler;
 -(void)getVersionInfo:(id)args
 {
 	if(![self checkWatchConnected]) {
-		NSLog(@"[WARN] TiPebble.getVersionInfo: No watch connected");
+		NSLog(@"[WARN] Pebble.getVersionInfo: No watch connected");
 
 		return;
 	}
@@ -194,7 +206,7 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.getVersionInfo");
+		NSLog(@"[DEBUG] Pebble.getVersionInfo");
 
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
@@ -232,7 +244,7 @@ id updateHandler;
 -(void)launchApp:(id)args
 {
 	if(![self checkWatchConnected]) {
-		NSLog(@"[WARN] TiPebble.launchApp: No watch connected");
+		NSLog(@"[WARN] Pebble.launchApp: No watch connected");
 
 		return;
 	}
@@ -241,7 +253,7 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.launchApp");
+		NSLog(@"[DEBUG] Pebble.launchApp");
 
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
@@ -254,7 +266,7 @@ id updateHandler;
 
 		[connectedWatch appMessagesLaunch:^(PBWatch *watch, NSError *error) {
 			if(!error) {
-				NSLog(@"[DEBUG] TiPebble.launchApp: Success");
+				NSLog(@"[DEBUG] Pebble.launchApp: Success");
 
 				[self listenToConnectedWatch];
 
@@ -263,7 +275,7 @@ id updateHandler;
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
 				}
 			} else {
-				NSLog(@"[ERROR] TiPebble.launchApp: Error");
+				NSLog(@"[ERROR] Pebble.launchApp: Error");
 
 				if(errorCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:error.description, @"description", nil];
@@ -277,7 +289,7 @@ id updateHandler;
 -(void)killApp:(id)args
 {
 	if(![self checkWatchConnected]) {
-		NSLog(@"[WARN] TiPebble.killApp: No watch connected");
+		NSLog(@"[WARN] Pebble.killApp: No watch connected");
 
 		return;
 	}
@@ -286,7 +298,7 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.killApp");
+		NSLog(@"[DEBUG] Pebble.killApp");
 
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
@@ -299,14 +311,14 @@ id updateHandler;
 
 		[connectedWatch appMessagesKill:^(PBWatch *watch, NSError *error) {
 			if(!error) {
-				NSLog(@"[DEBUG] TiPebble.killApp: Success");
+				NSLog(@"[DEBUG] Pebble.killApp: Success");
 				
 				if(successCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully killed app", @"message", nil];
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
 				}
 			} else {
-				NSLog(@"[ERROR] TiPebble.killApp: Error");
+				NSLog(@"[ERROR] Pebble.killApp: Error");
 
 				if(errorCallback != nil) {
 					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:error.description, @"description", nil];
@@ -320,7 +332,7 @@ id updateHandler;
 -(void)sendMessage:(id)args
 {
 	if(![self checkWatchConnected]) {
-		NSLog(@"[WARN] TiPebble.sendMessage: No watch connected");
+		NSLog(@"[WARN] Pebble.sendMessage: No watch connected");
 
 		return;
 	}
@@ -329,7 +341,7 @@ id updateHandler;
 	ENSURE_SINGLE_ARG(args, NSDictionary);
 
 	@synchronized(connectedWatch) {
-		NSLog(@"[DEBUG] TiPebble.sendMessage");
+		NSLog(@"[DEBUG] Pebble.sendMessage");
 
 		id success = [args objectForKey:@"success"];
 		id error = [args objectForKey:@"error"];
@@ -364,11 +376,11 @@ id updateHandler;
 
 		[connectedWatch appMessagesPushUpdate:update onSent:^(PBWatch *watch, NSDictionary *update, NSError *error) {
 			if(!error) {
-				NSLog(@"[DEBUG] TiPebble.sendMessage: Success");
+				NSLog(@"[DEBUG] Pebble.sendMessage: Success");
 
 				[self _fireEventToListener:@"success" withObject:nil listener:successCallback thisObject:nil];
 			} else {
-				NSLog(@"[ERROR] TiPebble.sendMessage: Error");
+				NSLog(@"[ERROR] Pebble.sendMessage: Error");
 
 				[self _fireEventToListener:@"error" withObject:error listener:errorCallback thisObject:nil];
 			}

@@ -1,6 +1,6 @@
-# TiPebble
+# TitaniumPebble
 
-For a complete guide on integrating TiPebble in your project, please refer to the [README](https://github.com/mcongrove/TiPebble/blob/master/README.md). This document is only a function reference.
+For a complete guide on integrating TitaniumPebble in your project, please refer to the [README](https://github.com/mcongrove/TitaniumPebble/blob/master/README.md). This document is only a function reference.
 
 ## prop: connectedCount
 

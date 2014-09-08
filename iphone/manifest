@@ -2,16 +2,16 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 0.6.0
+version: 1.0.0
 apiversion: 2
-description: Implements basic features of the Pebble iOS SDK.
-author: Joe Beuckman
-license: 
-copyright: no
+description: Titanium Pebble integration for iOS and Android
+author: Matthew Congrove
+license: Apache Public License v2
+copyright: Copyright 2014 Matthew Congrove
 
 # these should not be edited
-name: TiPebble
-moduleid: org.beuckman.tipebble
+name: TitaniumPebble
+moduleid: com.mcongrove.pebble
 guid: 01b0607f-455b-4c1e-8f26-a07128d90089
 platform: iphone
 minsdk: 3.0.0.GA

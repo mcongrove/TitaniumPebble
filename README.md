@@ -1,24 +1,26 @@
-# TiPebble
+# TitaniumPebble
 
-Implements basic features of the Pebble SDK for iOS and Android.
+Titanium Pebble integration for iOS and Android
 
-## Downloading [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/org.beuckman.tipebble)
+## Downloading [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/com.mcongrove.pebble)
 
 Download the latest distribution ZIP-file in `/dist` and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
-`$ gittio install org.beuckman.tipebble`
+`$ gittio install com.mcongrove.pebble`
 
 ## Sample
 
-An example [Titanium Mobile](https://github.com/mcongrove/TiPebble-Example-Mobile) application and [Pebble](https://github.com/mcongrove/TiPebble-Example-Pebble) application are available for download.
+An example [Titanium Mobile](https://github.com/mcongrove/TitaniumPebble-Mobile) application and [Pebble](https://github.com/mcongrove/TitaniumPebble-Watch) application are available for download.
 
 ## Documentation
 
-Aside from the Quick Start guide below, you can also view the full module reference in the [documentation](https://github.com/mcongrove/TiPebble/blob/master/documentation/index.md).
+Aside from the Quick Start guide below, you can also view the full module reference in the [documentation](https://github.com/mcongrove/TitaniumPebble/blob/master/documentation/index.md).
 
 ## Credits
 
-TiPebble iOS module originally developed by [Joe Beuckman](https://github.com/jbeuckm); contributions and Android module by [Matthew Congrove](https://github.com/mcongrove); contributions by [Jon Alter](https://github.com/jonalter) and [Chris Bowley](https://github.com/fridayforward).
+Developed by [Matthew Congrove](https://github.com/mcongrove) with contributions from [Jon Alter](https://github.com/jonalter) and [Chris Bowley](https://github.com/fridayforward).
+
+Based on the TiPebble iOS module developed by [Joe Beuckman](https://github.com/jbeuckm).
 
 ## Quick Start
 
@@ -44,10 +46,10 @@ To keep the connection to the Pebble active while the application is running in 
 
 ##### Instantiation #####
 
-Import the TiPebble module and provide your Pebble application's UUID:
+Import the TitaniumPebble module and provide your Pebble application's UUID:
 
 ```
-var pebble = require("org.beuckman.tipebble");
+var pebble = require("com.mcongrove.pebble");
 
 // This demo UUID is from the Pebble documentation
 pebble.setAppUUID("226834ae-786e-4302-a52f-6e7efc9f990b");

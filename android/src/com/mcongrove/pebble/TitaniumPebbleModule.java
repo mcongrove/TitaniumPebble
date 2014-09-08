@@ -1,4 +1,20 @@
-package org.beuckman.tipebble;
+/**
+ * Copyright 2014 Matthew Congrove
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.mcongrove.pebble;
 
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollFunction;
@@ -22,10 +38,10 @@ import org.json.JSONObject;
 import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
 
-@Kroll.module(name="TiPebble", id="org.beuckman.tipebble")
-public class TiPebbleModule extends KrollModule
+@Kroll.module(name="TitaniumPebble", id="com.mcongrove.pebble")
+public class TitaniumPebbleModule extends KrollModule
 {
-	private static final String LCAT = "TiPebble";
+	private static final String LCAT = "Pebble";
 	private static UUID uuid;
 	private int connectedCount = 0;
 	private static boolean isListeningToPebble = false;
@@ -36,7 +52,7 @@ public class TiPebbleModule extends KrollModule
 	private PebbleKit.PebbleAckReceiver ackReceiver = null;
 	private PebbleKit.PebbleNackReceiver nackReceiver = null;
 
-	public TiPebbleModule()
+	public TitaniumPebbleModule()
 	{
 		super();
 	}
@@ -60,31 +76,31 @@ public class TiPebbleModule extends KrollModule
 		
 		if(connectedReceiver != null)
 		{
-			PebbleKit.registerPebbleConnectedReceiver(getApplicationContext(), null);
+			getApplicationContext().unregisterReceiver(connectedReceiver);
 			connectedReceiver = null;
 		}
 		
 		if(disconnectedReceiver != null)
 		{
-			PebbleKit.registerPebbleDisconnectedReceiver(getApplicationContext(), null);
+			getApplicationContext().unregisterReceiver(disconnectedReceiver);
 			disconnectedReceiver = null;
 		}
 		
 		if(dataReceiver != null)
 		{
-			PebbleKit.registerReceivedDataHandler(getApplicationContext(), null);
+			getApplicationContext().unregisterReceiver(dataReceiver);
 			dataReceiver = null;
 		}
 		
 		if(ackReceiver != null)
 		{
-			PebbleKit.registerReceivedAckHandler(getApplicationContext(), null);
+			getApplicationContext().unregisterReceiver(ackReceiver);
 			ackReceiver = null;
 		}
 		
 		if(nackReceiver != null)
 		{
-			PebbleKit.registerReceivedNackHandler(getApplicationContext(), null);
+			getApplicationContext().unregisterReceiver(nackReceiver);
 			nackReceiver = null;
 		}
 	}
@@ -477,5 +493,4 @@ public class TiPebbleModule extends KrollModule
 	TODO:
 		- Map ACK/NACK handler to sendMessage so it can fire success/error callback for each message
 		- Queue messages in sendMessage to avoid overflowing Pebble channel
-		- Figure out why unregisterReceiver symbol isn't being found
 */
