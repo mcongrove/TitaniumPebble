@@ -391,6 +391,9 @@ public class TitaniumPebbleModule extends KrollModule
 		{
 			PebbleKit.startAppOnPebble(getApplicationContext(), uuid);
 			
+			setConnectedCount(0);
+			listenToConnectedWatch();
+			
 			Log.d(LCAT, "launchApp: Success");
 			
 			if(successCallback != null)
