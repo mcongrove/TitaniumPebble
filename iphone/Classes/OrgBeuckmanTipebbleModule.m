@@ -128,11 +128,6 @@ id updateHandler;
 	if(connectedWatch == nil) {
 		NSLog(@"[WARN] TiPebble.checkWatchConnected: No watch connected");
 
-		if(errorCallback != nil) {
-			NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"No Pebble watch connected.", @"message", nil];
-			[self _fireEventToListener:@"error" withObject:event listener:errorCallback thisObject:nil];
-		}
-
 		return FALSE;
 	} else {
 		return TRUE;
@@ -211,26 +206,22 @@ id updateHandler;
 		errorCallback = [error retain];
 
 		[connectedWatch getVersionInfo:^(PBWatch *watch, PBVersionInfo *versionInfo) {
-			NSLog(@"Pebble firmware os version: %li", (long)versionInfo.runningFirmwareMetadata.version.os);
-			NSLog(@"Pebble firmware major version: %li", (long)versionInfo.runningFirmwareMetadata.version.major);
-			NSLog(@"Pebble firmware minor version: %li", (long)versionInfo.runningFirmwareMetadata.version.minor);
-			NSLog(@"Pebble firmware suffix version: %@", versionInfo.runningFirmwareMetadata.version.suffix);
+			NSLog(@"[DEBUG] Pebble FW Major: %li", (long)versionInfo.runningFirmwareMetadata.version.major);
+			NSLog(@"[DEBUG] Pebble FW Minor: %li", (long)versionInfo.runningFirmwareMetadata.version.minor);
 
 			if(successCallback != nil) {
 				NSDictionary *versionInfoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.os], @"os",
 				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.major], @"major",
-				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.minor], @"minor",
-				versionInfo.runningFirmwareMetadata.version.suffix, @"suffix", nil];
+				[NSString stringWithFormat:@"%li", (long)versionInfo.runningFirmwareMetadata.version.minor], @"minor"
 
 				[self _fireEventToListener:@"success" withObject:versionInfoDict listener:successCallback thisObject:nil];
 			}
 		}
 		onTimeout:^(PBWatch *watch) {
-			NSLog(@"[DEBUG] Timed out trying to get version info from Pebble.");
+			NSLog(@"[WARN] Could not retrieve version info from Pebble");
 
 			if(errorCallback != nil) {
-				NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Timed out trying to get version info from Pebble.", @"message",nil];
+				NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Could not retrieve version info from Pebble", @"message",nil];
 				[self _fireEventToListener:@"error" withObject:event listener:errorCallback thisObject:nil];
 			}
 		}
@@ -268,7 +259,7 @@ id updateHandler;
 				[self listenToConnectedWatch];
 
 				if(successCallback != nil) {
-					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully launched app.", @"message", nil];
+					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully launched app", @"message", nil];
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
 				}
 			} else {
@@ -311,7 +302,7 @@ id updateHandler;
 				NSLog(@"[DEBUG] TiPebble.killApp: Success");
 				
 				if(successCallback != nil) {
-					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully killed app.", @"message", nil];
+					NSDictionary *event = [NSDictionary dictionaryWithObjectsAndKeys:@"Successfully killed app", @"message", nil];
 					[self _fireEventToListener:@"success" withObject:event listener:successCallback thisObject:nil];
 				}
 			} else {
