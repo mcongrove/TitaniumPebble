@@ -118,7 +118,6 @@ public class TiPebbleModule extends KrollModule
 	{
 		Log.d(LCAT, "connect");
 		
-		KrollDict argsDict = new KrollDict(args);
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		
@@ -147,7 +146,6 @@ public class TiPebbleModule extends KrollModule
 	{
 		Log.d(LCAT, "getVersionInfo");
 		
-		KrollDict argsDict = new KrollDict(args);
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		
@@ -196,7 +194,6 @@ public class TiPebbleModule extends KrollModule
 			return;
 		}
 		
-		KrollDict argsDict = new KrollDict(args);
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		
@@ -237,7 +234,6 @@ public class TiPebbleModule extends KrollModule
 			return;
 		}
 		
-		KrollDict argsDict = new KrollDict(args);
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		
@@ -278,11 +274,9 @@ public class TiPebbleModule extends KrollModule
 			return;
 		}
 		
-		KrollDict argsDict = new KrollDict(args);
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		final Object message = args.get("message");
-		
-		
+		KrollDict messageDict = new KrollDict(message);
 	}
 }
