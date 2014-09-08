@@ -6,6 +6,8 @@ For a complete guide on integrating TiPebble in your project, please refer to th
 
 How many Pebble devices are connected to the mobile device.
 
+_Note: On Android, this only returns `0` or `1`_
+
 ###### Return
 | Type | Value |
 |------|-------|
@@ -23,7 +25,7 @@ Sets the Pebble application UUID.
 ###### Return
 _None_
 
-## func: checkWatchConnect
+## func: checkWatchConnected
 
 Checks if a Pebble is connected to the mobile device.
 
@@ -98,6 +100,8 @@ _None_
 ## func: sendMessage
 
 Sends a message to the Pebble.
+
+_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received_
 
 ###### Parameters
 | Name | Type | Value |

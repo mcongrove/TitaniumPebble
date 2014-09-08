@@ -151,6 +151,8 @@ static void init() {
 
 After you've connected, you can send messages from the phone to the Pebble:
 
+_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received_
+
 ```
 pebble.sendMessage({
 	message: {
