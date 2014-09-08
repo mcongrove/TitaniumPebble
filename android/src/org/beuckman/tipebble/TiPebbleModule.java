@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 import com.getpebble.android.kit.PebbleKit;
+import com.getpebble.android.kit.util.PebbleDictionary;
 
 @Kroll.module(name="TiPebble", id="org.beuckman.tipebble")
 public class TiPebbleModule extends KrollModule
@@ -203,7 +204,7 @@ public class TiPebbleModule extends KrollModule
 		{
 			PebbleKit.startAppOnPebble(getApplicationContext(), uuid);
 			
-			Log.e(LCAT, "launchApp: Success");
+			Log.d(LCAT, "launchApp: Success");
 			
 			if(successCallback != null)
 			{
@@ -243,7 +244,7 @@ public class TiPebbleModule extends KrollModule
 		{
 			PebbleKit.closeAppOnPebble(getApplicationContext(), uuid);
 			
-			Log.e(LCAT, "killApp: Success");
+			Log.d(LCAT, "killApp: Success");
 			
 			if(successCallback != null)
 			{
@@ -279,14 +280,24 @@ public class TiPebbleModule extends KrollModule
 		final KrollFunction successCallback = (KrollFunction)args.get("success");
 		final KrollFunction errorCallback = (KrollFunction)args.get("error");
 		final Object message = args.get("message");
-		Map<Integer, Object> messageHash = (HashMap<Integer, Object>) message;
 		
+		Map<Integer, Object> messageHash = (HashMap<Integer, Object>) message;
 		Iterator<Map.Entry<Integer, Object>> entries = messageHash.entrySet().iterator();
+		
+		PebbleDictionary data = new PebbleDictionary();
 		
 		while(entries.hasNext())
 		{
 			Map.Entry<Integer, Object> entry = entries.next();
-		    System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+			
+			if(entry.getValue() instanceof Integer)
+			{
+				data.addInt32((Integer) entry.getKey(), (Integer) entry.getValue());
+			} else if(entry.getValue() instanceof String) {
+				data.addString((Integer) entry.getKey(), (String) entry.getValue());
+			}
+			
+			PebbleKit.sendDataToPebble(getApplicationContext(), uuid, data);
 		}
 	}
 }
