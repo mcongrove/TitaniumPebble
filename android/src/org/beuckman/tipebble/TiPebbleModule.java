@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import com.getpebble.android.kit.PebbleKit;
 import com.getpebble.android.kit.util.PebbleDictionary;
 
@@ -134,7 +135,7 @@ public class TiPebbleModule extends KrollModule
 			public void onReceive(Context context, Intent intent)
 			{
 				Log.d(LCAT, "watchDidConnect");
-				fireEvent("watchConnected", new KrollDict());
+				fireEvent("watchConnected", new Object[] {});
 			}
 		};
 		
@@ -144,7 +145,7 @@ public class TiPebbleModule extends KrollModule
 			public void onReceive(Context context, Intent intent)
 			{
 				Log.d(LCAT, "watchDidDisconnect");
-				fireEvent("watchDisconnected", new KrollDict());
+				fireEvent("watchDisconnected", new Object[] {});
 			}
 		};
 		
@@ -155,7 +156,7 @@ public class TiPebbleModule extends KrollModule
 			{
 				if(!data.contains(0))
 				{
-					Log.e(LCAT, "listenToConnectedWatch: Received Message, Data Corrupt");
+					Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
 					
 					PebbleKit.sendNackToPebble(context, transactionId);
 					
@@ -166,15 +167,25 @@ public class TiPebbleModule extends KrollModule
 				
 				try
 				{
-					JSONArray json = new JSONArray(data.toJsonString());
-					Log.e(LCAT, json.toString());
+					JSONArray jsonArray = new JSONArray(data.toJsonString());
+					
+					if(jsonArray.length() > 0)
+					{
+						JSONObject jsonObject = jsonArray.getJSONObject(0);
+						
+						if(jsonObject.has("value"))
+						{
+							Log.i(LCAT, "listenToConnectedWatch: Received message");
+							
+							HashMap message = new HashMap();
+							message.put("message", jsonObject.getString("value"));
+							
+							fireEvent("update", message);
+						}
+					}
 				} catch(Throwable e) {
-					Log.e(LCAT, "listenToConnectedWatch: Received Message, Data Corrupt");
+					Log.e(LCAT, "listenToConnectedWatch: Received message, data corrupt");
 				}
-				
-				
-				//Log.i(LCAT, "Received value=" + data.getUnsignedInteger(0) + " for key: 0");
-				
 			}
 		};
 		
@@ -219,7 +230,7 @@ public class TiPebbleModule extends KrollModule
 		{
 			boolean connected = PebbleKit.isWatchConnected(getApplicationContext());
 			
-			if(connected)
+			if(!connected)
 			{
 				Log.w(LCAT, "checkWatchConnected: No watch connected");
 			}
@@ -429,7 +440,7 @@ public class TiPebbleModule extends KrollModule
 	}
 }
 
-//TODO: Here's the todo list
 /*
-	- Map ACK/NACK handler to sendMessage so it can fire success/error callback for each message
+	TODO:
+		- Map ACK/NACK handler to sendMessage so it can fire success/error callback for each message
 */
