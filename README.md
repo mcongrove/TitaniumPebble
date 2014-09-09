@@ -4,7 +4,7 @@ Titanium Pebble integration for iOS and Android
 
 ## Downloading [![gitTio](http://gitt.io/badge.png)](http://gitt.io/component/com.mcongrove.pebble)
 
-Download the latest distribution ZIP-file in `/dist` and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
+Download the latest distribution ZIP file in `/dist` and consult the [Titanium Documentation](http://docs.appcelerator.com/titanium/latest/#!/guide/Using_a_Module) on how to install it, or simply use the [gitTio CLI](http://gitt.io/cli):
 
 `$ gittio install com.mcongrove.pebble`
 
@@ -24,7 +24,7 @@ Based on the TiPebble iOS module developed by [Joe Beuckman](https://github.com/
 
 ## Quick Start
 
-##### Configuration - iOS#####
+##### Configuration - iOS #####
 
 Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 
@@ -35,7 +35,13 @@ Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 </array>
 ```
 
-To keep the connection to the Pebble active while the application is running in background mode, register a background service in Titanium and also add the following to your `tiapp.xml`:
+##### Background Services #####
+
+To keep the connection to the Pebble active while the application is running in background mode:
+
+__iOS__
+
+Register a `BackgroundService` in Titanium. The background service script can require in the TitaniumPebble module and operate as normal. You'll also need to add the following to your `tiapp.xml`:
 
 ```
 <key>UIBackgroundModes</key>
@@ -43,6 +49,12 @@ To keep the connection to the Pebble active while the application is running in 
 	<string>external-accessory</string>
 </array>
 ```
+
+__Android__
+
+Due to differences in how Android services work, Android requires more effort. You'll need to register and start a `ServiceIntent`; __do not specify an `interval` to ensure the service only runs once__. The background service script can require in the TitaniumPebble module and operate as normal.
+
+However, because the service can run while the application is in the foreground, you need to unregister any event listeners in your application that you plan to use in the background service.
 
 ##### Instantiation #####
 
@@ -153,7 +165,7 @@ static void init() {
 
 After you've connected, you can send messages from the phone to the Pebble:
 
-_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received_
+_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received and output to the console. See [Issue 1](https://github.com/mcongrove/TitaniumPebble/issues/1) for more information_
 
 ```
 pebble.sendMessage({
@@ -197,8 +209,3 @@ static void init() {
 	app_message_open(inbound_size, outbound_size);
 }
 ```
-
-## To-Do
-
- * Map ACK/NACK handlers to transactions in Android module
- * Demonstrate and document Android background connectivity
