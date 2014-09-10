@@ -2,6 +2,10 @@
 
 For a complete guide on integrating TitaniumPebble in your project, please refer to the [README](https://github.com/mcongrove/TitaniumPebble/blob/master/README.md). This document is only a function reference.
 
+ * [Properties](https://github.com/mcongrove/TitaniumPebble/blob/master/documentation/index.md#properties)
+ * [Functions](https://github.com/mcongrove/TitaniumPebble/blob/master/documentation/index.md#functions)
+ * [Events](https://github.com/mcongrove/TitaniumPebble/blob/master/documentation/index.md#events)
+
 ## Properties
 
 #### connectedCount
