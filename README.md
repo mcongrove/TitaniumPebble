@@ -39,7 +39,7 @@ Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 
 To keep the connection to the Pebble active while the application is running in background mode:
 
-__iOS__
+ * iOS
 
 Register a `BackgroundService` in Titanium. The background service script can require in the TitaniumPebble module and operate as normal. You'll also need to add the following to your `tiapp.xml`:
 
@@ -50,7 +50,7 @@ Register a `BackgroundService` in Titanium. The background service script can re
 </array>
 ```
 
-__Android__
+ * Android
 
 Due to differences in how Android services work, Android requires more effort. You'll need to register and start a `ServiceIntent`; __do not specify an `interval` to ensure the service only runs once__. The background service script can require in the TitaniumPebble module and operate as normal.
 
