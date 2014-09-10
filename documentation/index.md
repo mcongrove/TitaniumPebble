@@ -145,7 +145,7 @@ Fires when a Pebble connects to the device.
 
 _Note: The Pebble only sends connect/disconnect events when the watch pairing status changes or the watch enter/leaves the range of the phone. For instance, the connect event does not fire if the Pebble is already connected to your phone and you then launch the application._
 
-__Event Data__
+###### Event Data
 
 _None_
 
@@ -155,7 +155,7 @@ Fires when a Pebble disconnects from the device.
 
 _Note: The Pebble only sends connect/disconnect events when the watch pairing status changes or the watch enter/leaves the range of the phone. For instance, the connect event does not fire if the Pebble is already connected to your phone and you then launch the application._
 
-__Event Data__
+###### Event Data
 
 _None_
 
@@ -165,7 +165,7 @@ Fires when a Pebble disconnects from the device.
 
 _Note: The Pebble only sends connect/disconnect events when the watch pairing status changes or the watch enter/leaves the range of the phone. For instance, the connect event does not fire if the Pebble is already connected to your phone and you then launch the application._
 
-__Event Data__
+###### Event Data
 
 | Type | Value |
 |------|-------|
