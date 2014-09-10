@@ -24,7 +24,7 @@ Based on the TiPebble iOS module developed by [Joe Beuckman](https://github.com/
 
 ## Quick Start
 
-##### Configuration - iOS #####
+### Configuration - iOS ###
 
 Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 
@@ -35,12 +35,12 @@ Add this to your `<ios><plist><dict>` section in `tiapp.xml`:
 </array>
 ```
 
-##### Background Services #####
+### Background Services ###
 
 To keep the connection to the Pebble active while the application is running in background mode:
 
- * iOS
-
+###### iOS ######
+ 
 Register a `BackgroundService` in Titanium. The background service script can require in the TitaniumPebble module and operate as normal. You'll also need to add the following to your `tiapp.xml`:
 
 ```
@@ -50,13 +50,13 @@ Register a `BackgroundService` in Titanium. The background service script can re
 </array>
 ```
 
- * Android
+###### Android ######
 
 Due to differences in how Android services work, Android requires more effort. You'll need to register and start a `ServiceIntent`; __do not specify an `interval` to ensure the service only runs once__. The background service script can require in the TitaniumPebble module and operate as normal.
 
 However, because the service can run while the application is in the foreground, you need to unregister any event listeners in your application that you plan to use in the background service.
 
-##### Instantiation #####
+### Instantiation ###
 
 Import the TitaniumPebble module and provide your Pebble application's UUID:
 
@@ -67,7 +67,7 @@ var pebble = require("com.mcongrove.pebble");
 pebble.setAppUUID("226834ae-786e-4302-a52f-6e7efc9f990b");
 ```
 
-##### Connecting to Pebble #####
+### Connecting to Pebble ###
 
 To connect to the Pebble:
 
@@ -82,7 +82,7 @@ pebble.connect({
 });
 ```
 
-##### Handling Connection Events #####
+### Handling Connection Events ###
 
 Respond when the Pebble app connects/disconnects using the following code:
 
@@ -101,7 +101,7 @@ pebble.addEventListener("watchConnected", watchConnected);
 pebble.addEventListener("watchDisconnected", watchDisconnected);
 ```
 
-##### Launch Pebble Application #####
+### Launch Pebble Application ###
 
 To launch your Pebble application on the watch from your mobile application:
 
@@ -116,7 +116,7 @@ pebble.launchApp({
 });
 ```
 
-##### Recieve Messages from Pebble #####
+### Recieve Messages from Pebble ###
 
 After you've connected, you can add an event listener to start watching for messages from the Pebble:
 
@@ -161,7 +161,7 @@ static void init() {
 }
 ```
 
-##### Send Messages to Pebble #####
+### Send Messages to Pebble ###
 
 After you've connected, you can send messages from the phone to the Pebble:
 
