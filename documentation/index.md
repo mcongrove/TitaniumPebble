@@ -66,7 +66,6 @@ Connect to the Pebble watch.
 
 _None_
 
-
 #### getVersionInfo
 
 Retrieves version information from the Pebble.
@@ -122,8 +121,6 @@ _None_
 
 Sends a message to the Pebble.
 
-_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received_
-
 ###### Parameters
 
 | Name | Type | Value |
@@ -162,8 +159,6 @@ _None_
 #### update
 
 Fires when a Pebble disconnects from the device.
-
-_Note: The Pebble only sends connect/disconnect events when the watch pairing status changes or the watch enter/leaves the range of the phone. For instance, the connect event does not fire if the Pebble is already connected to your phone and you then launch the application._
 
 ###### Event Data
 
