@@ -74,10 +74,10 @@ To connect to the Pebble:
 ```
 pebble.connect({
 	success: function(_event) {
-		Ti.API.info("Connected to Pebble");
+		alert("Connected to Pebble");
 	},
 	error: function(_event) {
-		Ti.API.error("Cannot Connect to Pebble");
+		alert("Cannot Connect to Pebble");
 	}
 });
 ```
@@ -108,10 +108,10 @@ To launch your Pebble application on the watch from your mobile application:
 ```
 pebble.launchApp({
 	success: function(_event) {
-		Ti.API.info("Pebble Application Launched");
+		alert("Pebble Application Launched");
 	},
 	error: function(_event) {
-		Ti.API.error("Could Not Launch Pebble Application");
+		alert("Could Not Launch Pebble Application");
 	}
 });
 ```
@@ -124,7 +124,7 @@ After you've connected, you can add an event listener to start watching for mess
 pebble.addEventListener("update", watchMessageReceived);
 
 function watchMessageReceived(_message) {
-	Ti.API.info("Message Received: " + _message.message);
+	alert("Message Received: " + _message.message);
 }
 ```
 
