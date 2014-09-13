@@ -18,7 +18,7 @@ Aside from the Quick Start guide below, you can also view the full module refere
 
 ## Credits
 
-Developed by [Matthew Congrove](https://github.com/mcongrove) with contributions from [Jon Alter](https://github.com/jonalter), [Chris Bowley](https://github.com/fridayforward) and Thomas Wilkinson.
+Developed by [Matthew Congrove](https://github.com/mcongrove) with contributions from [Jon Alter](https://github.com/jonalter), [Chris Bowley](https://github.com/fridayforward) and [Thomas Wilkinson](https://github.com/thomasdelbert).
 
 Based on the TiPebble iOS module developed by [Joe Beuckman](https://github.com/jbeuckm).
 
