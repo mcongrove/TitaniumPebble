@@ -44,7 +44,9 @@ public class TitaniumPebbleModule extends KrollModule
 	private static final String LCAT = "Pebble";
 	private static UUID uuid;
 	private int connectedCount = 0;
-	private static boolean isListeningToPebble = false;
+	private boolean isListeningToPebble = false;
+	private static HashMap<Integer,HashMap<String,KrollFunction>> callbacks = new HashMap<Integer,HashMap<String,KrollFunction>>();
+	private static Integer transactionCounter = 0;
 	
 	private BroadcastReceiver connectedReceiver = null;
 	private BroadcastReceiver disconnectedReceiver = null;
@@ -236,7 +238,17 @@ public class TitaniumPebbleModule extends KrollModule
 					@Override
 					public void receiveAck(Context context, int transactionId)
 					{
-						Log.i(LCAT, "Received ACK");
+						Log.i(LCAT, "Received ACK for transaction: " + transactionId);
+						
+						if(callbacks.containsKey(transactionId)) {
+							HashMap callbackArray = (HashMap)callbacks.get(transactionId);
+							
+							if(callbackArray.containsKey("success")) {
+								KrollFunction successCallback = (KrollFunction)callbackArray.get("success");
+								
+								successCallback.call(getKrollObject(), new Object[] {});
+							}
+						}
 					}
 				};
 				
@@ -250,7 +262,17 @@ public class TitaniumPebbleModule extends KrollModule
 					@Override
 					public void receiveNack(Context context, int transactionId)
 					{
-						Log.i(LCAT, "Received NACK");
+						Log.e(LCAT, "Received NACK for transaction: " + transactionId);
+						
+						if(callbacks.containsKey(transactionId)) {
+							HashMap callbackArray = (HashMap)callbacks.get(transactionId);
+							
+							if(callbackArray.containsKey("error")) {
+								KrollFunction errorCallback = (KrollFunction)callbackArray.get("error");
+								
+								errorCallback.call(getKrollObject(), new Object[] {});
+							}
+						}
 					}
 				};
 				
@@ -473,8 +495,21 @@ public class TitaniumPebbleModule extends KrollModule
 		
 		Map<Integer, Object> messageHash = (HashMap<Integer, Object>) message;
 		Iterator<Map.Entry<Integer, Object>> entries = messageHash.entrySet().iterator();
+		HashMap<String,KrollFunction> callbackArray = new HashMap<String,KrollFunction>();
 		
 		PebbleDictionary data = new PebbleDictionary();
+		
+		if(successCallback != null)
+		{
+			callbackArray.put("success", successCallback);
+		}
+		
+		if(errorCallback != null)
+		{
+			callbackArray.put("error", errorCallback);
+		}
+		
+		callbacks.put(transactionCounter, callbackArray);
 		
 		while(entries.hasNext())
 		{
@@ -488,12 +523,8 @@ public class TitaniumPebbleModule extends KrollModule
 			}
 		}
 		
-		PebbleKit.sendDataToPebble(getApplicationContext(), uuid, data);
+		PebbleKit.sendDataToPebbleWithTransactionId(getApplicationContext(), uuid, data, transactionCounter);
+		
+		transactionCounter++;
 	}
 }
-
-/*
-	TODO:
-		- Map ACK/NACK handler to sendMessage so it can fire success/error callback for each message
-		- Queue messages in sendMessage to avoid overflowing Pebble channel
-*/

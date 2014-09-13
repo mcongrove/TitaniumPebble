@@ -19,7 +19,6 @@
 #import "TiHost.h"
 #import "TiUtils.h"
 
-#define MAX_OUTGOING_SIZE 95
 #define MESSAGE_KEY @(0x0)
 
 id updateHandler;

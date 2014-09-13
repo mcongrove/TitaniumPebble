@@ -18,7 +18,7 @@ Aside from the Quick Start guide below, you can also view the full module refere
 
 ## Credits
 
-Developed by [Matthew Congrove](https://github.com/mcongrove) with contributions from [Jon Alter](https://github.com/jonalter) and [Chris Bowley](https://github.com/fridayforward).
+Developed by [Matthew Congrove](https://github.com/mcongrove) with contributions from [Jon Alter](https://github.com/jonalter), [Chris Bowley](https://github.com/fridayforward) and Thomas Wilkinson.
 
 Based on the TiPebble iOS module developed by [Joe Beuckman](https://github.com/jbeuckm).
 
@@ -164,8 +164,6 @@ static void init() {
 ### Send Messages to Pebble ###
 
 After you've connected, you can send messages from the phone to the Pebble:
-
-_Note: On Android, the `success` and `error` callback are not fired. Instead, a general `ACK` or `NACK` is received and output to the console. See [Issue 1](https://github.com/mcongrove/TitaniumPebble/issues/1) for more information_
 
 ```
 pebble.sendMessage({
